@@ -28,11 +28,10 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
         return JNI_ERR;
     }
     cls = env->FindClass("com/scu/dynamicjni/HelloJNI");
+    //下面方法已经失效
 //    nm[0] = "printHello";
 //    nm[0].signature="()V";
 //    nm[0].fnPtr = (void*)printHello;
-//
-//
 //    nm[1] = "printString";
 //    nm[1].signature="(Ljava/lang/String;)V";
 //    nm[1].fnPtr = (void*)printString;
