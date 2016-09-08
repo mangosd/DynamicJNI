@@ -7,6 +7,6 @@ public class HelloJNI {
     static {
         System.loadLibrary("hellojni");
     }
-    public static native void printHello();
-    public static native void printString(String str);
+    public native void printHello();
+    public native void printString(String str);
 }
