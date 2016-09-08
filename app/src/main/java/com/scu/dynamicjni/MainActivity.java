@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.text1).setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
