@@ -14,7 +14,7 @@ extern "C" {
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_com_scu_dynamicjni_HelloJNI_printHello
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_scu_dynamicjni_HelloJNI
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_com_scu_dynamicjni_HelloJNI_printHello
  * Signature: (Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_com_scu_dynamicjni_HelloJNI_printString
-  (JNIEnv *, jobject, jstring);
+  (JNIEnv *, jclass, jstring);
 
 #ifdef __cplusplus
 }

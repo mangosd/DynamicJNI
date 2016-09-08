@@ -5,7 +5,7 @@
 #include "com_scu_dynamicjni_HelloJNI.h"
 
 void printHello(JNIEnv*env,jobject obj);
-void printHelloString(JNIEnv*env,jobject obj,jstring jstr);
+void printString(JNIEnv*env,jobject obj,jstring jstr);
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 {
@@ -14,7 +14,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 //            { "hello", "()Ljava/lang/String;", (void*)native_hello},
 //    };
     JNIEnv*env=NULL;
-    JNINativeMethod nm[] = {{"printHello","()V",(void*)printHello},{"printHelloString","(Ljava/lang/String;)V",(void*)printHelloString}};
+    JNINativeMethod nm[] = {{"printHello","()V",(void*)printHello},{"printString","(Ljava/lang/String;)V",(void*)printString}};
     jclass cls;
     jint result = -1;
     if(vm->GetEnv((void**)&env,JNI_VERSION_1_4)!=JNI_OK)
@@ -28,9 +28,9 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 //    nm[0].fnPtr = (void*)printHello;
 //
 //
-//    nm[1] = "printHelloString";
+//    nm[1] = "printString";
 //    nm[1].signature="(Ljava/lang/String;)V";
-//    nm[1].fnPtr = (void*)printHelloString;
+//    nm[1].fnPtr = (void*)printString;
 
     env->RegisterNatives(cls,nm,2);
     return JNI_VERSION_1_4;
@@ -42,7 +42,7 @@ void printHello(JNIEnv *env,jobject obj)
     return;
 }
 
-void printHelloString(JNIEnv *env,jobject obj,jstring jstr)
+void printString(JNIEnv *env,jobject obj,jstring jstr)
 {
     const char *str = env->GetStringUTFChars(jstr,0);
     printf("%s\n",str);
