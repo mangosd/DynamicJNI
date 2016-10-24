@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <android/log.h>
+#include <cutils/log.h>
+#define LOG_TAG "MY_LOG"
 #define TAG "myndk"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 void printHello(JNIEnv*env,jobject obj);
@@ -35,7 +37,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 //    nm[1] = "printString";
 //    nm[1].signature="(Ljava/lang/String;)V";
 //    nm[1].fnPtr = (void*)printString;
-
+    LOGV("JNI_OnLoad 通过cutils/log.h里面的LOGV输出日志");
     env->RegisterNatives(cls,nm,2);
     return JNI_VERSION_1_4;
 }
