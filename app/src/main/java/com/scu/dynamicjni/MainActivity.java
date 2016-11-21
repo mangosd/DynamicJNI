@@ -6,11 +6,16 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    static {
+        System.loadLibrary("hellojni");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.text1).setOnClickListener(this);
+        findViewById(R.id.test2).setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -18,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.text1:
                 new HelloJNI().printHello();
               //  HelloJNI.printString("ceshi");
+                break;
+            case R.id.test2:
+
                 break;
         }
     }

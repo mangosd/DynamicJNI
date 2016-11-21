@@ -7,9 +7,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <android/log.h>
-#include <cutils/log.h>
+//#include <cutils/log.h>
 #define LOG_TAG "MY_LOG"
 #define TAG "myndk"
+
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE,TAG,__VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 void printHello(JNIEnv*env,jobject obj);
 void printString(JNIEnv*env,jobject obj,jstring jstr);
@@ -21,7 +23,10 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 //            { "hello", "()Ljava/lang/String;", (void*)native_hello},
 //    };
     JNIEnv*env=NULL;
-    JNINativeMethod nm[] = {{"printHello","()V",(void*)printHello},{"printString","(Ljava/lang/String;)V",(void*)printString}};
+    JNINativeMethod nm[] = {{"printHello","()V",(void*)printHello},
+                            {"printString","(Ljava/lang/String;)V",(void*)printString}
+    };
+
     jclass cls;
     jint result = -1;
     if(vm->GetEnv((void**)&env,JNI_VERSION_1_4)!=JNI_OK)
@@ -38,7 +43,13 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved)
 //    nm[1].signature="(Ljava/lang/String;)V";
 //    nm[1].fnPtr = (void*)printString;
     LOGV("JNI_OnLoad 通过cutils/log.h里面的LOGV输出日志");
-    env->RegisterNatives(cls,nm,2);
+    //注册本地native方法
+    if(env->RegisterNatives(cls, nm,  2) < 0)
+    {
+        LOGV("ERROR: MediaPlayer native registration failed\n");
+        return JNI_ERR;
+    }
+
     return JNI_VERSION_1_4;
 }
 
@@ -68,7 +79,7 @@ void printHello(JNIEnv *env,jobject obj)
 
 void printString(JNIEnv *env,jobject obj,jstring jstr)
 {
-    const char *str = env->GetStringUTFChars(jstr,0);
+    const char *str = env->GetStringUTFChars(jstr,0 );
     printf("%s\n",str);
     return;
 }

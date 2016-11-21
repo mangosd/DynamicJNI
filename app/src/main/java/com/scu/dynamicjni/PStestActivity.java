@@ -17,7 +17,7 @@ public class PStestActivity extends Activity {
 
     private TextView text;
     List<String>psinfos = new ArrayList<String>();
-
+    private static final String ACTION_NOTIFICATION_LISTENER_SETTINGS = "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +32,7 @@ public class PStestActivity extends Activity {
                     sb.append(psinfos.get(i)+"\n");
                 }
                 text.setText(sb.toString());
+//                startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
             }
         });
     }
